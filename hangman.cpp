@@ -37,7 +37,7 @@ int main(){
         cout<< "\nGuess a letter. You have "<<remaining_guesses<<" guesses remaining.\n";
         cout<<"Word: "<<display_word<<"\n";
         cout<<"Guessed Letters: ";
-        for(int index; index<guessed_letters.size();index++){
+        for(int index=0; index<guessed_letters.size();index++){
             cout<<guessed_letters[index];
         }
         cout<<endl;
@@ -49,16 +49,15 @@ int main(){
                 }
             }
             cout<<"That letter is in the word!\n";
-            guessed_letters.push_back(guess);
         }
         else{
             cout<<"That letter is not in the word. :(\n";
             remaining_guesses--;
-            guessed_letters.push_back(guess);
         }
         if(display_word.find("_")==string::npos){
             break;
         }
+        guessed_letters.push_back(guess);
     }
     if(remaining_guesses>0){
         cout<<"You Won! The word was: "<<random_word<<"\n";
