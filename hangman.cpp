@@ -1,6 +1,8 @@
 #include <iostream>
 #include <random>
 #include <string>
+#include <typeinfo>
+#include <vector>
 
 using namespace std;
 
@@ -24,19 +26,45 @@ int main(){
     int random_index = dist(gen);
     string random_word = words[random_index];
     cout<<"The word is "<<random_word.length()<<" letters long\n";
-
+    string display_word;
+    for(int character; character<random_word.length(); character++){
+        display_word.append("_");
+    }
     int remaining_guesses = 6;
+    vector<char> guessed_letters={};
     while(remaining_guesses>0){
         char guess;
         cout<< "Guess a letter. You have "<<remaining_guesses<<" guesses remaining.\n";
+        cout<<"Word: "<<display_word<<"\n";
+        cout<<"Guessed Letters: ";
+        for(int index; index<guessed_letters.size();index++){
+            cout<<guessed_letters[index];
+        }
+        cout<<endl;
         cin>>guess;
         if(random_word.find(guess)!=string::npos){
+            for (int index;index<random_word.length(); index++){
+                if (random_word[index]==guess){
+                    display_word[index]=guess;
+                }
+            }
             cout<<"That letter is in the word!\n";
+            guessed_letters.push_back(guess);
         }
         else{
             cout<<"That letter is not in the word. :(\n";
             remaining_guesses--;
+            guessed_letters.push_back(guess);
         }
+        if(display_word.find("_")==string::npos){
+            break;
+        }
+    }
+    if(remaining_guesses>0){
+        cout<<"You Won! The word was: "<<random_word<<"\n";
+    }
+    else{
+        cout<<"You Lost :( The word was: "<<random_word<<"\n";
     }
 
 }
