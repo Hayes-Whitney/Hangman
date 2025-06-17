@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <string>
 
 using namespace std;
 
@@ -21,7 +22,21 @@ int main(){
     mt19937 gen(rd());
     uniform_int_distribution<int> dist(0,99);
     int random_index = dist(gen);
+    string random_word = words[random_index];
+    cout<<"The word is "<<random_word.length()<<" letters long\n";
 
-    cout<<"\n"<<words[random_index]<<"\n\n";
+    int remaining_guesses = 6;
+    while(remaining_guesses>0){
+        char guess;
+        cout<< "Guess a letter. You have "<<remaining_guesses<<" guesses remaining.\n";
+        cin>>guess;
+        if(random_word.find(guess)!=string::npos){
+            cout<<"That letter is in the word!\n";
+        }
+        else{
+            cout<<"That letter is not in the word. :(\n";
+            remaining_guesses--;
+        }
+    }
 
 }
