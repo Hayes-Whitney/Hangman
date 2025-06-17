@@ -34,7 +34,7 @@ int main(){
     vector<char> guessed_letters={};
     while(remaining_guesses>0){
         char guess;
-        cout<< "Guess a letter. You have "<<remaining_guesses<<" guesses remaining.\n";
+        cout<< "\nGuess a letter. You have "<<remaining_guesses<<" guesses remaining.\n";
         cout<<"Word: "<<display_word<<"\n";
         cout<<"Guessed Letters: ";
         for(int index; index<guessed_letters.size();index++){
@@ -43,7 +43,7 @@ int main(){
         cout<<endl;
         cin>>guess;
         if(random_word.find(guess)!=string::npos){
-            for (int index;index<random_word.length(); index++){
+            for (int index=0;index<random_word.length(); index++){
                 if (random_word[index]==guess){
                     display_word[index]=guess;
                 }
